@@ -1,184 +1,263 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="id">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Payment Gateway - Anime Style</title>
+    <title>Pembayaran Digital</title>
     <style>
-        :root {
-            --primary: #e63946;
-            --secondary: #1a1a1a;
-            --accent: #f1faee;
-        }
-        
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            transition: all 0.3s ease;
+            font-family: 'Poppins', sans-serif;
         }
-        
+
         body {
-            background-color: var(--secondary);
-            color: var(--accent);
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
             min-height: 100vh;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            padding: 2rem;
-            background-image: 
-                radial-gradient(circle at 25% 25%, rgba(230, 57, 70, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 75% 75%, rgba(230, 57, 70, 0.1) 0%, transparent 50%);
+            padding: 20px;
         }
-        
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
         .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+
+        .header p {
+            opacity: 0.9;
+        }
+
+        .payment-methods {
+            padding: 30px;
+        }
+
+        .payment-title {
+            font-size: 20px;
+            margin-bottom: 20px;
+            color: #333;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .payment-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 3px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 3px;
+        }
+
+        .payment-option {
             display: flex;
             align-items: center;
-            margin-bottom: 2rem;
-            width: 100%;
-            max-width: 800px;
-        }
-        
-        .anime-logo {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 3px solid var(--primary);
-            margin-right: 1rem;
-            box-shadow: 0 0 15px rgba(230, 57, 70, 0.5);
-        }
-        
-        .title {
-            font-size: 2.5rem;
-            font-weight: 700;
-            background: linear-gradient(45deg, var(--primary), #ff6b6b);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 10px rgba(230, 57, 70, 0.3);
-        }
-        
-        .subtitle {
-            font-size: 1rem;
-            opacity: 0.8;
-        }
-        
-        .payment-container {
-            background: rgba(26, 26, 26, 0.8);
-            backdrop-filter: blur(10px);
-            border-radius: 15px;
-            padding: 2rem;
-            width: 100%;
-            max-width: 800px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-            border: 1px solid rgba(230, 57, 70, 0.2);
-        }
-        
-        .payment-method {
-            margin-bottom: 2rem;
-        }
-        
-        .method-title {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-        }
-        
-        .method-icon {
-            width: 30px;
-            margin-right: 10px;
-        }
-        
-        .payment-card {
-            background: rgba(30, 30, 30, 0.6);
-            border-radius: 10px;
-            padding: 1.5rem;
-            margin-bottom: 1rem;
-            border-left: 4px solid var(--primary);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            background: #f9f9f9;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
             cursor: pointer;
-            transition: transform 0.2s ease;
+            border: 1px solid #eee;
         }
-        
-        .payment-card:hover {
+
+        .payment-option:hover {
             transform: translateY(-5px);
-            background: rgba(40, 40, 40, 0.8);
-            box-shadow: 0 5px 15px rgba(230, 57, 70, 0.2);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            border-color: #d1d1d1;
         }
-        
-        .payment-info {
-            flex-grow: 1;
+
+        .payment-logo {
+            width: 60px;
+            height: 60px;
+            object-fit: contain;
+            margin-right: 20px;
+            border-radius: 12px;
+            background: white;
+            padding: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         }
-        
+
+        .payment-details {
+            flex: 1;
+        }
+
         .payment-name {
             font-weight: 600;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
+            font-size: 18px;
+            color: #333;
+            margin-bottom: 5px;
         }
-        
+
         .payment-number {
-            font-family: monospace;
-            font-size: 1.2rem;
-            color: var(--primary);
-            letter-spacing: 1px;
+            font-size: 16px;
+            color: #666;
+            word-break: break-all;
         }
-        
+
         .copy-btn {
-            background: var(--primary);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
             border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 5px;
+            padding: 8px 15px;
+            border-radius: 8px;
             cursor: pointer;
-            font-weight: 600;
-            margin-left: 1rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            margin-left: 15px;
         }
-        
+
         .copy-btn:hover {
-            background: #c1121f;
             transform: scale(1.05);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
         }
-        
-        .footer {
-            margin-top: 2rem;
+
+        .qris-container {
             text-align: center;
-            opacity: 0.7;
-            font-size: 0.9rem;
+            margin-top: 15px;
         }
-        
+
+        .qris-image {
+            max-width: 250px;
+            border-radius: 12px;
+            border: 1px solid #eee;
+            margin-top: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .qris-image:hover {
+            transform: scale(1.03);
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: #f9f9f9;
+            color: #666;
+            font-size: 14px;
+        }
+
         @media (max-width: 600px) {
-            .header {
+            .payment-option {
                 flex-direction: column;
                 text-align: center;
             }
-            
-            .anime-logo {
+
+            .payment-logo {
                 margin-right: 0;
-                margin-bottom: 1rem;
+                margin-bottom: 15px;
             }
-            
-            .payment-card {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-            
+
             .copy-btn {
                 margin-left: 0;
-                margin-top: 1rem;
+                margin-top: 10px;
                 width: 100%;
             }
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header">
-        <img src="https://i.pinimg.com/originals/28/70/3f/28703f8f5a2c1e2b4b60a6e4f6f9b9e2.jpg" alt="Anime Character" class="anime-logo">
-        <div>
-            <h1 class="title">Anime Payment</h1>
-            <p class="
+    <div class="container">
+        <div class="header">
+            <h1>Pembayaran Digital</h1>
+            <p>Pilih metode pembayaran yang tersedia</p>
+        </div>
+
+        <div class="payment-methods">
+            <h2 class="payment-title">Transfer via E-Wallet</h2>
+
+            <!-- DANA -->
+            <div class="payment-option" onclick="copyToClipboard('083838681020', 'DANA')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_DANA.svg" alt="DANA" class="payment-logo">
+                <div class="payment-details">
+                    <div class="payment-name">DANA</div>
+                    <div class="payment-number">083838681020</div>
+                </div>
+                <button class="copy-btn">Salin</button>
+            </div>
+
+            <!-- OVO -->
+            <div class="payment-option" onclick="copyToClipboard('083838681020', 'OVO')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/e/eb/Logo_ovo.svg" alt="OVO" class="payment-logo">
+                <div class="payment-details">
+                    <div class="payment-name">OVO</div>
+                    <div class="payment-number">083838681020</div>
+                </div>
+                <button class="copy-btn">Salin</button>
+            </div>
+
+            <!-- GOPAY -->
+            <div class="payment-option" onclick="copyToClipboard('083838681020', 'GOPAY')">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/8/86/Gopay_logo.svg" alt="GOPAY" class="payment-logo">
+                <div class="payment-details">
+                    <div class="payment-name">GOPAY</div>
+                    <div class="payment-number">083838681020</div>
+                </div>
+                <button class="copy-btn">Salin</button>
+            </div>
+
+            <!-- QRIS -->
+            <div class="payment-option">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/d0/QRIS_logo.svg/1200px-QRIS_logo.svg.png" alt="QRIS" class="payment-logo">
+                <div class="payment-details">
+                    <div class="payment-name">QRIS</div>
+                    <p>Scan QR Code berikut untuk pembayaran</p>
+                    <div class="qris-container">
+                        <img src="https://files.catbox.moe/o8qbrz.jpg" alt="QR Code" class="qris-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Pastikan nominal transfer sesuai dengan total pembayaran</p>
+            <p>Hubungi kami jika mengalami kesalahan pembayaran</p>
+        </div>
+    </div>
+
+    <script>
+        function copyToClipboard(text, method) {
+            navigator.clipboard.writeText(text).then(function() {
+                alert(`Nomor ${method} berhasil disalin: ${text}`);
+            }, function() {
+                // Fallback for browsers that don't support clipboard API
+                const textarea = document.createElement('textarea');
+                textarea.value = text;
+                document.body.appendChild(textarea);
+                textarea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textarea);
+                alert(`Nomor ${method} berhasil disalin: ${text}`);
+            });
+        }
+    </script>
+</body>
+</html>-
